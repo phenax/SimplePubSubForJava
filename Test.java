@@ -36,5 +36,24 @@ public class Test {
 
 		/* Unsubscribing to 'funtime' */
 		events.off("awesomeness");
+
+
+
+		/* Creating a timer */
+		events.onTime(3000, "waiting", new Callback() {
+			public void event() {
+				System.out.println("3 seconds are done bruh");
+			}
+		});
+
+		/* Start the timer */
+		/* Waits for 3000ms before executing callback */
+		events.emitTime("waiting");
+
+		/* To stop the timeout event */
+		// events.offTime("waiting");
+
+		System.out.println("Gonna wait for 3 seconds here...");
+
 	}
 }
