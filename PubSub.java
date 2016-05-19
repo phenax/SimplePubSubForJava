@@ -85,22 +85,26 @@ public class PubSub {
 	public void onTime(final long time, String name, final Callback cb) {
 
 		/* Creating a new thread to run the callback */
-		Thread timeThread= new Thread() {
+		Container svr= new Container() {
 			public void run() {
 				try {
 					/* Delay of `time`ms */
 					Thread.sleep(time);
 
-					/* Callback fired */
-				   	cb.event();
+					if(!this.exit) {
+						/* Callback fired */
+				   		cb.event();
+				   }
 				} catch(InterruptedException e) {
 					e.printStackTrace();
 				}
 			}  
 		};
 
+		Thread timeThread= new Thread(svr, name);
+
 		/* Adds the thread to the array of TimeEvents */
-		this.timeEvents.add(new TimeEvent(time, timeThread, name, cb));
+		this.timeEvents.add(new TimeEvent(svr, timeThread, name, cb));
 	}
 
 
@@ -143,7 +147,7 @@ public class PubSub {
 				if(event.name == name) {
 
 					/* Stop the thread */
-    				event.eventThread.stop();
+    				event.svr.stop();
 
 					found_event= true;
 					break;
