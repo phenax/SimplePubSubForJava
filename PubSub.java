@@ -74,6 +74,8 @@ public class PubSub {
 	}
 
 
+
+
 	/*
 	 *	onTime:: Used to subscribe to time events 
 	 *	 that are published after `time`ms i.e. create a thread
@@ -85,7 +87,7 @@ public class PubSub {
 	public void onTime(final long time, String name, final Callback cb) {
 
 		/* Creating a new thread to run the callback */
-		Container svr= new Container() {
+		Container wrapper= new Container() {
 			public void run() {
 				try {
 					/* Delay of `time`ms */
@@ -93,18 +95,18 @@ public class PubSub {
 
 					if(!this.exit) {
 						/* Callback fired */
-				   		cb.event();
-				   }
+						cb.event();
+					}
 				} catch(InterruptedException e) {
 					e.printStackTrace();
 				}
-			}  
+			}
 		};
 
-		Thread timeThread= new Thread(svr, name);
+		Thread timeThread= new Thread(wrapper, name);
 
 		/* Adds the thread to the array of TimeEvents */
-		this.timeEvents.add(new TimeEvent(svr, timeThread, name, cb));
+		this.timeEvents.add(new TimeEvent(wrapper, timeThread, name, cb));
 	}
 
 
@@ -147,7 +149,7 @@ public class PubSub {
 				if(event.name == name) {
 
 					/* Stop the thread */
-    				event.svr.stop();
+    				event.wrapper.stop();
 
 					found_event= true;
 					break;

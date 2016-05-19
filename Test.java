@@ -51,7 +51,7 @@ public class Test {
 		events.emitTime("waiting");
 
 		/* To stop the timeout event */
-		events.offTime("waiting");
+		// events.offTime("waiting");
 
 		System.out.println("Gonna wait for 3 seconds here...");
 

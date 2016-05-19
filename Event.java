@@ -1,7 +1,8 @@
 /*
- * Event(class):: 	Used to create an event
+ * Used to create an event
+ *
  *	@param name		(String) The name of the event
- *	@param cb		(Callback) The callback object for the event
+ *	@param cb		(Callback) The callback for the event
  */
 class Event {
 	public String name;
