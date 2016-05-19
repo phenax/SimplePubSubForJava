@@ -1,53 +1,71 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-class Event {
-	public String name;
-	public Callback callback;
 
-	Event(String name, Callback cb) {
-		this.name= name;
-		this.callback= cb;
-	}
-}
-
+/*
+ * PubSub:: Interface for subscribing and publishing events
+ */
 public class PubSub {
 	protected ArrayList<Event> events;
 
-	PubSub(int numOfEvents) {
-		events= new ArrayList<Event>();
+	PubSub() {
+		this.events= new ArrayList<Event>();
 	}
 
+	/*
+	 *	on:: Used to subscribe to events.
+	 *
+	 *	@param eventname 	(String) The name of the event to subscribe to.
+	 *	@param cb 			(Callback) Callback that is executed when the event occurs.
+	 */
 	public void on(String eventname, Callback cb) {
-		events.add(new Event(eventname, cb));
+		this.events.add(new Event(eventname, cb));
 	}
 
+	/*
+	 *	emit:: Used to publish an event
+	 *
+	 *	@param name (String) The name of the event to publish.
+	 */
 	public void emit(String name) {
-		Iterator itr= events.iterator();
+		Iterator iterator= this.events.iterator();
 
-		while(itr.hasNext()) {
-			Event ev= (Event)itr.next();
+		while(iterator.hasNext()) {
+			Event event= (Event) iterator.next();
 
-			if(ev.name == name) {
-				ev.callback.event();
+			/* If event is found, execute callback */
+			if(event.name == name) {
+				event.callback.event();
 				return;
 			}
 		}
 	}
 
+
+	/*
+	 *	off:: Used to unsubscribe an event.
+	 *
+	 *	@param name	(String) The name of the event to unsubscribe.
+	 */
 	public void off(String name) {
 		int index= 0;
-		Iterator itr= events.iterator();
+		boolean found_event= false;
+		Iterator iterator= this.events.iterator();
 
-		while(itr.hasNext()) {
-			Event ev= (Event)itr.next();
+		while(iterator.hasNext()) {
+			Event event= (Event) iterator.next();
 
-			if(ev.name == name)
+			/* If event is found, break out of the loop */
+			if(event.name == name) {
+				found_event= true;
 				break;
+			}
 
 			index++;
 		}
 
-		events.remove(index);
+		/* Remove event if found */
+		if(found_event)
+			this.events.remove(index);
 	}
 }
