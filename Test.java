@@ -7,27 +7,27 @@ public class Test {
 
 		/* Subscribing a callback to the event 'funtime' */
 		events.on("funtime", new Callback() {
-			public void event() {
+			public void run() {
 				System.out.println("ITS FUN TIME");
 			}
 		});
 
 		/* Subscribing a callback to the event 'awesomeness' */
 		events.on("awesomeness", new Callback() {
-			public void event() {
+			public void run() {
 				System.out.println("WOWOWOWOWOWOW");
 			}
 		});
 
 		/* Overwriting an event */
 		events.on("awesomeness", new Callback() {
-			public void event() {
+			public void run() {
 				System.out.println("AWESOMENESS WOWOWOWOWOWOW");
 			}
 		});
 
 		events.on("wow", new Callback() {
-			public void event() {
+			public void run() {
 				System.out.println("WOWOWOWOWOWOW");
 			}
 		});
@@ -60,7 +60,7 @@ public class Test {
 
 		/* Creating a timer */
 		events.onTime(3000, "waiting", new Callback() {
-			public void event() {
+			public void run() {
 				System.out.println("3 seconds are done bruh");
 			}
 		});

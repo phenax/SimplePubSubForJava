@@ -78,7 +78,7 @@ public class PubSub {
 			if(event.getName() == name) {
 
 				/* Execute the callback */
-				event.getCallback().event();
+				event.getCallback().run();
 				
 				return;
 			
@@ -137,7 +137,7 @@ public class PubSub {
 					if(!this.exit) {
 
 						/* Callback fired */
-						cb.event();
+						cb.run();
 					
 					}
 				} catch(InterruptedException e) {
