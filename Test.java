@@ -1,6 +1,9 @@
 public class Test {
 	public static void main(String[] args) {
+
+		/* Creating an eventhandler instance of PubSub */
 		PubSub events= new PubSub();
+
 
 		/* Subscribing a callback to the event 'funtime' */
 		events.on("funtime", new Callback() {
@@ -15,6 +18,21 @@ public class Test {
 				System.out.println("WOWOWOWOWOWOW");
 			}
 		});
+
+		/* Overwriting an event */
+		events.on("awesomeness", new Callback() {
+			public void event() {
+				System.out.println("AWESOMENESS WOWOWOWOWOWOW");
+			}
+		});
+
+		events.on("wow", new Callback() {
+			public void event() {
+				System.out.println("WOWOWOWOWOWOW");
+			}
+		});
+
+		events.emit("wow");
 
 
 		System.out.println("What time is it?");
@@ -39,6 +57,7 @@ public class Test {
 
 
 
+
 		/* Creating a timer */
 		events.onTime(3000, "waiting", new Callback() {
 			public void event() {
@@ -51,7 +70,7 @@ public class Test {
 		events.emitTime("waiting");
 
 		/* To stop the timeout event */
-		// events.offTime("waiting");
+		events.offTime("waiting");
 
 		System.out.println("Gonna wait for 3 seconds here...");
 
