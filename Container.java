@@ -1,14 +1,20 @@
-/*
- *	Container::   A wrapper for creating excess 
- *	 bootstrapping stuff for new threads
+/**
+ *	A wrapper for creating excess 
+ *	 bootstrap stuff for new threads
+ *	
+ *	@author Akshay Nair<phenax5@gmail.com>
  */
 public class Container implements Runnable {
 	protected volatile boolean exit = false;
 
-	/* Stuff goes here */
+	/**
+	 * Stuff goes here
+	 */
 	public void run() {}
 
-	/* Stop the thread */
+	/**
+	 * Stops running the thread
+	 */
 	public void stop() {
 		exit = true;
 	}

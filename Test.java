@@ -1,3 +1,8 @@
+/**
+ * Class to test all the events
+ *	
+ *	@author Akshay Nair<phenax5@gmail.com>
+ */
 public class Test {
 	public static void main(String[] args) {
 
