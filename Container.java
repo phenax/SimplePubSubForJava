@@ -1,6 +1,6 @@
 /**
  *	A wrapper for creating excess 
- *	 bootstrap stuff for new threads
+ *	 boilerplate stuff for new threads
  *	
  *	@author Akshay Nair<phenax5@gmail.com>
  */
